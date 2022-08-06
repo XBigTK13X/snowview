@@ -10,10 +10,10 @@ class StreamViewer {
     public StreamViewer(String uri){
         _uri = Uri.parse(uri);
     }
-    public void openStream(Activity activity){
+    public void openStream(){
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setPackage("org.videolan.vlc"); // Use org.videolan.vlc for nightly builds
         intent.setDataAndType(_uri, "video/*");
-        activity.startActivityForResult(intent, VLC_SUCCESS);
+        MainActivity.getInstance().startActivityForResult(intent, VLC_SUCCESS);
     }
 }
