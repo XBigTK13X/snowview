@@ -1,4 +1,4 @@
-package com.simplepathstudios.snowview;
+package com.simplepathstudios.snowcam;
 
 import com.google.gson.internal.LinkedTreeMap;
 
@@ -24,12 +24,13 @@ class FrigateCamera {
 
     public String displayName;
     public String rawName;
+    public String restreamUrl;
 
     public void setName(String name){
         this.rawName = name;
         this.displayName = name.replace('-',' ');
+        this.restreamUrl = SnowcamSettings.FrigateRestreamUrl + "/live/" + rawName;
     }
-
     public String getQualityStreamUrl(){
         return (String)((ArrayList<LinkedTreeMap>)ffmpeg.get("inputs")).get(0).get("path");
     }

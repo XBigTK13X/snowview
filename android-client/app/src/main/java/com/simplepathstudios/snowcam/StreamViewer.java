@@ -1,4 +1,4 @@
-package com.simplepathstudios.snowview;
+package com.simplepathstudios.snowcam;
 
 import android.app.Activity;
 import android.content.Intent;

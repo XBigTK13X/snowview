@@ -1,4 +1,4 @@
-package com.simplepathstudios.snowview;
+package com.simplepathstudios.snowcam;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;

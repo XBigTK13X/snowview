@@ -1,12 +1,9 @@
-package com.simplepathstudios.snowview;
-
-import android.util.Log;
+package com.simplepathstudios.snowcam;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import retrofit2.Call;
 import retrofit2.http.GET;
 
 interface FrigateService {
@@ -27,7 +24,7 @@ public class FrigateClient {
     private FrigateService httpClient;
     private FrigateClient(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://9914.us:5000")
+                .baseUrl(SnowcamSettings.FrigateApiUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         this.httpClient = retrofit.create(FrigateService.class);

@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.simplepathstudios.snowview",
+  "applicationId": "com.simplepathstudios.snowcam",
   "variantName": "release",
   "elements": [
     {

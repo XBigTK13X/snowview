@@ -1,5 +1,8 @@
-package com.simplepathstudios.snowview;
+package com.simplepathstudios.snowcam;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -56,14 +59,33 @@ class CameraListAdapter extends RecyclerView.Adapter<CameraListAdapter.ViewHolde
 
         @Override
         public void onClick(View v) {
-            StreamViewer viewer = new StreamViewer(this.camera.getSpeedStreamUrl());
+            StreamViewer viewer = new StreamViewer(this.camera.restreamUrl);
             viewer.openStream();
         }
 
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
             ViewHolder self = this;
-            MenuItem viewFastStreamAction = menu.add("Fast stream");
+            MenuItem viewRestreamAction = menu.add("Restream (default)");
+            viewRestreamAction.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    StreamViewer viewer = new StreamViewer(self.camera.restreamUrl);
+                    viewer.openStream();
+                    return false;
+                }
+            });
+            MenuItem copyRestreamAction = menu.add("Copy restream URL");
+            copyRestreamAction.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    ClipboardManager clipboard = (ClipboardManager) MainActivity.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("label", self.camera.restreamUrl);
+                    clipboard.setPrimaryClip(clip);
+                    return false;
+                }
+            });
+            MenuItem viewFastStreamAction = menu.add("Direct stream - fast");
             viewFastStreamAction.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
@@ -72,7 +94,7 @@ class CameraListAdapter extends RecyclerView.Adapter<CameraListAdapter.ViewHolde
                     return false;
                 }
             });
-            MenuItem viewDetailedStreamAction = menu.add("Detailed stream");
+            MenuItem viewDetailedStreamAction = menu.add("Direct stream - pretty");
             viewDetailedStreamAction.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
                 @Override
                 public boolean onMenuItemClick(MenuItem item) {
